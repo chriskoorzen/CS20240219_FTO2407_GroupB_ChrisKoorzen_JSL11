@@ -288,16 +288,17 @@ function openEditTaskModal(task) {
       alert("Please enter a non-empty Title");  // Warn
       title.value = "";                         // Reset
       return;
-    }
+    };
 
     // Save changes
-    putTask(task.id, {
+    const saved = putTask(task.id, {
       "id": task.id,          // use existing ID
       "title": title,
       "description": description,
       "status": status,
       "board": activeBoard
     });
+    if (!saved){ console.log("Failed to update Task."); };
 
     // Close the modal and refresh the UI to reflect the changes
     toggleModal(false, elements.editTaskModal);

@@ -37,7 +37,9 @@ export const putTask = (id, updatedTask) => {
   if (taskIndex > -1) {
     tasks[taskIndex] = updatedTask;
     saveTasks(tasks);
+    return true;    // Save succeeded
   }
+  return false;     // Save failed
 };
 
 export const deleteTask = (id) => {

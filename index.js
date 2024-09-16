@@ -26,15 +26,15 @@ function initializeData() {
 
 // TASK: Get elements from the DOM
 const elements = {
-  headerBoardName : "",
-  columnDivs : "",
-  editTaskModal : "",
-  filterDiv : "",
-  hideSideBarBtn : "",
-  showSideBarBtn : "",
-  themeSwitch : "",
-  createNewTaskBtn : "",
-  modalWindow : "",
+  headerBoardName : document.getElementById("header-board-name"),
+  columnDivs : document.getElementsByClassName("column-div"),
+  editTaskModal : document.getElementById("edit-task-modal-window"),
+  filterDiv : document.getElementById("filterDiv"),
+  hideSideBarBtn : document.getElementById("hide-side-bar-btn"),
+  showSideBarBtn : document.getElementById("show-side-bar-btn"),
+  themeSwitch : document.getElementById("switch"),
+  createNewTaskBtn : document.getElementById("add-new-task-btn"),
+  modalWindow : document.getElementById("new-task-modal-window"),
 };
 
 let activeBoard = "";

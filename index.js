@@ -328,6 +328,7 @@ function init() {
   const showSidebar = localStorage.getItem('showSideBar') === 'true';
   toggleSidebar(showSidebar);
   const isLightTheme = localStorage.getItem('light-theme') === 'enabled';
-  document.body.classList.toggle('light-theme', isLightTheme);
-  fetchAndDisplayBoardsAndTasks();                                  // Initial display of boards and tasks
+  elements.themeSwitch.checked = isLightTheme;    // Set switch to same state
+  toggleTheme();                                  // Update UI
+  fetchAndDisplayBoardsAndTasks();
 };

@@ -130,31 +130,6 @@ function styleActiveBoard(boardName) {
 };
 
 
-function addTaskToUI(task) {
-  const column = document.querySelector('.column-div[data-status="${task.status}"]'); 
-  if (!column) {
-    console.error(`Column not found for status: ${task.status}`);
-    return;
-  };
-
-  let tasksContainer = column.querySelector('.tasks-container');
-  if (!tasksContainer) {
-    console.warn(`Tasks container not found for status: ${task.status}, creating one.`);
-    tasksContainer = document.createElement('div');
-    tasksContainer.className = 'tasks-container';
-    column.appendChild(tasksContainer);
-  };
-
-  const taskElement = document.createElement('div');
-  taskElement.className = 'task-div';
-  taskElement.textContent = task.title;                                 // Modify as needed
-  taskElement.setAttribute('data-task-id', task.id);
-  
-  tasksContainer.appendChild(); 
-};
-
-
-
 function setupEventListeners() {
   // Cancel editing task event listener
   const cancelEditBtn = document.getElementById('cancel-edit-btn');
@@ -226,7 +201,6 @@ function addTask(event) {
 
     const newTask = createNewTask(task);          // Save to localstorage
     if (newTask) {
-      addTaskToUI(newTask);
       toggleModal(false);
       event.target.reset();                       // reset form
       refreshTasksUI();

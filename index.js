@@ -27,7 +27,7 @@ function initializeData() {
 // TASK: Get elements from the DOM
 const elements = {
   headerBoardName : document.getElementById("header-board-name"),
-  columnDivs : document.getElementsByClassName("column-div"),
+  columnDivs : document.querySelectorAll(".column-div"),
   editTaskModal : document.getElementById("edit-task-modal-window"),
   filterDiv : document.getElementById("filterDiv"),
   hideSideBarBtn : document.getElementById("hide-side-bar-btn"),
@@ -120,10 +120,10 @@ function refreshTasksUI() {
 // Styles the active board by adding an active class
 // TASK: Fix Bugs
 function styleActiveBoard(boardName) {
-  document.querySelectorAll('.board-btn').foreach(btn => { 
+  document.querySelectorAll('.board-btn').forEach(btn => { 
     
-    if(btn.textContent === boardName) { btn.add('active'); }
-    else { btn.remove('active'); };
+    if(btn.textContent === boardName) { btn.classList.add('active'); }
+    else { btn.classList.remove('active'); };
   });
 };
 
@@ -261,7 +261,8 @@ function saveTaskChanges(taskId) {
 /*************************************************************************************************************************************************/
 
 document.addEventListener('DOMContentLoaded', function() {
-  init();                                                           // init is called after the DOM is fully loaded
+  initializeData();
+  init();
 });
 
 function init() {

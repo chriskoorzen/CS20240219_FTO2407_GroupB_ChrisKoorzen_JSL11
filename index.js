@@ -29,6 +29,7 @@ const elements = {
   headerBoardName : document.getElementById("header-board-name"),
   columnDivs : document.querySelectorAll(".column-div"),
   editTaskModal : document.getElementById("edit-task-modal-window"),
+  editTaskForm : document.getElementById("edit-task-form"),
   filterDiv : document.getElementById("filterDiv"),
   hideSideBarBtn : document.getElementById("hide-side-bar-btn"),
   showSideBarBtn : document.getElementById("show-side-bar-btn"),
@@ -259,49 +260,62 @@ function toggleTheme() {
 
 function openEditTaskModal(task) {
   
-  // get references
-  const title = document.getElementById("edit-task-title-input");
-  const description = document.getElementById("edit-task-desc-input");
-  const status = document.getElementById("edit-select-status");
-
   // Set task details in modal inputs
-  title.value = task.title;
-  description.value = task.description;
-  status.value = task.status;
+  elements.editTaskForm.elements["edit-task-title-input"].value = task.title;
+  elements.editTaskForm.elements["edit-task-desc-input"].value = task.description;
+  elements.editTaskForm.elements["edit-select-status"].value = task.status;
 
   // Get button elements from the task modal
   const saveBtn = document.getElementById("save-task-changes-btn");
   const delBtn = document.getElementById("delete-task-btn");
 
+  // Use onclick to ensure there is only ever one listener loaded
+  // on the edit modal buttons
   // Call saveTaskChanges upon click of Save Changes button
-  saveBtn.addEventListener("click", () => { saveTaskChanges(task.id); });
- 
-  // Delete task using a helper function and close the task modal
-  delBtn.addEventListener("click", () => { 
-    deleteTask(task.id);
+  saveBtn.onclick = () => { 
+    
+    // Validate
+    if(!elements.editTaskForm.reportValidity()){ return; }
+
+    const title = elements.editTaskForm.elements["edit-task-title-input"].value.trim();
+    const description = elements.editTaskForm.elements["edit-task-desc-input"].value.trim();
+    const status = elements.editTaskForm.elements["edit-select-status"].value.trim();
+    
+    // Check if valid - Title cannot be empty
+    if (title === ""){
+      alert("Please enter a non-empty Title");  // Warn
+      title.value = "";                         // Reset
+      return;
+    }
+
+    // Save changes
+    putTask(task.id, {
+      "id": task.id,          // use existing ID
+      "title": title,
+      "description": description,
+      "status": status,
+      "board": activeBoard
+    });
+
+    // Close the modal and refresh the UI to reflect the changes
     toggleModal(false, elements.editTaskModal);
     elements.filterDiv.style.display = 'none';
     refreshTasksUI();
-  });
+  };
+ 
+  // Delete task using a helper function and close the task modal
+  delBtn.onclick = () => { 
+    deleteTask(task.id);
+
+    // Close the modal and refresh the UI to reflect the changes
+    toggleModal(false, elements.editTaskModal);
+    elements.filterDiv.style.display = 'none';
+    refreshTasksUI();
+  };
 
   // Show the edit task modal
   toggleModal(true, elements.editTaskModal);
 };
-
-function saveTaskChanges(taskId) {
-  // Get new user inputs
-  
-
-  // Create an object with the updated task details
-
-
-  // Update task using a hlper functoin
- 
-
-  // Close the modal and refresh the UI to reflect the changes
-
-  refreshTasksUI();
-}
 
 /*************************************************************************************************************************************************/
 

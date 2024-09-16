@@ -237,9 +237,11 @@ function toggleSidebar(show) {
   if (show){
     elements.sideBar.style.display = 'block';
     elements.showSideBarBtn.style.display = "none";
+    localStorage.setItem('showSideBar', 'true');
   } else {
     elements.sideBar.style.display = 'none';
     elements.showSideBarBtn.style.display = "block";
+    localStorage.setItem('showSideBar', 'false');
   }
 };
 
@@ -247,10 +249,12 @@ function toggleTheme() {
   if (elements.themeSwitch.checked){
     document.documentElement.classList.add("light-theme");
     document.getElementById("logo").src = "./assets/logo-light.svg";
+    localStorage.setItem('light-theme', 'enabled');
   }
   else {
     document.documentElement.classList.remove("light-theme");
     document.getElementById("logo").src = "./assets/logo-dark.svg";
+    localStorage.setItem('light-theme', 'disabled');
   };
 };
 

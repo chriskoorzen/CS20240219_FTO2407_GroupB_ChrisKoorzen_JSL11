@@ -18,7 +18,15 @@ function initializeData() {
 
 // TASK: Get elements from the DOM
 const elements = {
-
+  headerBoardName : "",
+  columnDivs : "",
+  editTaskModal : "",
+  filterDiv : "",
+  hideSideBarBtn : "",
+  showSideBarBtn : "",
+  themeSwitch : "",
+  createNewTaskBtn : "",
+  modalWindow : "",
 };
 
 let activeBoard = "";

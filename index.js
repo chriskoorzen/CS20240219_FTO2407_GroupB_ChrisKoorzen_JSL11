@@ -164,13 +164,11 @@ function setupEventListeners() {
   const cancelAddTaskBtn = document.getElementById('cancel-add-task-btn');
   cancelAddTaskBtn.addEventListener('click', () => {
     toggleModal(false);
-    elements.filterDiv.style.display = 'none';                          // Also hide the filter overlay
   });
 
   // Clicking outside the modal to close it
   elements.filterDiv.addEventListener('click', () => {
     toggleModal(false);
-    elements.filterDiv.style.display = 'none';                          // Also hide the filter overlay
   });
 
   // Show sidebar event listener
@@ -183,7 +181,6 @@ function setupEventListeners() {
   // Show Add New Task Modal event listener
   elements.createNewTaskBtn.addEventListener('click', () => {
     toggleModal(true);
-    elements.filterDiv.style.display = 'block';                         // Also show the filter overlay
   });
 
   // Add new task form submission event listener
@@ -196,6 +193,7 @@ function setupEventListeners() {
 // Task: Fix bugs
 function toggleModal(show, modal = elements.modalWindow) {
   modal.style.display = show ? 'block' : 'none';
+  elements.filterDiv.style.display = show ? 'block' : "none"; // DRY baby
 };
 
 /*************************************************************************************************************************************************
@@ -229,7 +227,6 @@ function addTask(event) {
     if (newTask) {
       addTaskToUI(newTask);
       toggleModal(false);
-      elements.filterDiv.style.display = 'none';
       event.target.reset();                       // reset form
       refreshTasksUI();
     };
@@ -299,7 +296,6 @@ function openEditTaskModal(task) {
 
     // Close the modal and refresh the UI to reflect the changes
     toggleModal(false, elements.editTaskModal);
-    elements.filterDiv.style.display = 'none';
     refreshTasksUI();
   };
  
@@ -309,7 +305,6 @@ function openEditTaskModal(task) {
 
     // Close the modal and refresh the UI to reflect the changes
     toggleModal(false, elements.editTaskModal);
-    elements.filterDiv.style.display = 'none';
     refreshTasksUI();
   };
 

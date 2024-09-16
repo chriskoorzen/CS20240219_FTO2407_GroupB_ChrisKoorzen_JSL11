@@ -202,18 +202,34 @@ function toggleModal(show, modal = elements.modalWindow) {
  * **********************************************************************************************************************************************/
 
 function addTask(event) {
-  event.preventDefault(); 
+  event.preventDefault();
+
+  // Get inputs
+  const title = event.target.elements["title-input"].value.trim();
+  const description = event.target.elements["desc-input"].value.trim();
+  const status = event.target.elements["select-status"].value.trim();
+
+  // Check if valid - Title cannot be empty
+  if (title === ""){
+    alert("Please enter a non-empty Title");  // Warn
+    title.value = "";                         // Reset
+    return;
+  }
 
   //Assign user input to the task object
     const task = {
-      
+      "title": title,
+      "description": description,
+      "status": status,
+      "board": activeBoard
     };
-    const newTask = createNewTask(task);
+
+    const newTask = createNewTask(task);          // Save to localstorage
     if (newTask) {
       addTaskToUI(newTask);
       toggleModal(false);
-      elements.filterDiv.style.display = 'none';                      // Also hide the filter overlay
-      event.target.reset();
+      elements.filterDiv.style.display = 'none';
+      event.target.reset();                       // reset form
       refreshTasksUI();
     };
 };

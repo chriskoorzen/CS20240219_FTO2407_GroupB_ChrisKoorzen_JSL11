@@ -232,9 +232,11 @@ function toggleSidebar(show) {
 function toggleTheme() {
   if (elements.themeSwitch.checked){
     document.documentElement.classList.add("light-theme");
+    document.getElementById("logo").src = "./assets/logo-light.svg";
   }
   else {
     document.documentElement.classList.remove("light-theme");
+    document.getElementById("logo").src = "./assets/logo-dark.svg";
   };
 };
 

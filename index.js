@@ -230,7 +230,12 @@ function toggleSidebar(show) {
 };
 
 function toggleTheme() {
- 
+  if (elements.themeSwitch.checked){
+    document.documentElement.classList.add("light-theme");
+  }
+  else {
+    document.documentElement.classList.remove("light-theme");
+  };
 };
 
 

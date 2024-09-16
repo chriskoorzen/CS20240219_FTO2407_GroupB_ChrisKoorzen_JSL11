@@ -35,6 +35,7 @@ const elements = {
   themeSwitch : document.getElementById("switch"),
   createNewTaskBtn : document.getElementById("add-new-task-btn"),
   modalWindow : document.getElementById("new-task-modal-window"),
+  sideBar:  document.getElementById("side-bar-div")
 };
 
 let activeBoard = "";
@@ -193,7 +194,7 @@ function setupEventListeners() {
 // Toggles tasks modal
 // Task: Fix bugs
 function toggleModal(show, modal = elements.modalWindow) {
-  modal.style.display = show ? 'block' : 'none'; 
+  modal.style.display = show ? 'block' : 'none';
 };
 
 /*************************************************************************************************************************************************
@@ -219,7 +220,13 @@ function addTask(event) {
 
 
 function toggleSidebar(show) {
- 
+  if (show){
+    elements.sideBar.style.display = 'block';
+    elements.showSideBarBtn.style.display = "none";
+  } else {
+    elements.sideBar.style.display = 'none';
+    elements.showSideBarBtn.style.display = "block";
+  }
 };
 
 function toggleTheme() {

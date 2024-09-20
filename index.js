@@ -10,16 +10,6 @@ import {
 import { initialData } from "./initialData.js";
 
 
-// Function checks if local storage already has data, if not it loads initialData to localStorage
-function initializeData() {
-  if (!localStorage.getItem('tasks')) {
-    localStorage.setItem('tasks', JSON.stringify(initialData)); 
-    localStorage.setItem('showSideBar', 'true');
-  } else {
-    console.log('Data already exists in localStorage');
-  };
-};
-
 // Get frequently used elements from the DOM
 const elements = {
   headerBoardName : document.getElementById("header-board-name"),
@@ -125,13 +115,11 @@ function styleActiveBoard(boardName) {
 function setupEventListeners() {
   // Cancel editing task event listener
   const cancelEditBtn = document.getElementById('cancel-edit-btn');
-  cancelEditBtn.addEventListener("click", () => toggleModal(false, elements.editTaskModal));
+  cancelEditBtn.addEventListener("click", () => toggleModal(false, elements.editTaskModal) );
 
   // Cancel adding new task event listener
   const cancelAddTaskBtn = document.getElementById('cancel-add-task-btn');
-  cancelAddTaskBtn.addEventListener('click', () => {
-    toggleModal(false);
-  });
+  cancelAddTaskBtn.addEventListener('click', () => toggleModal(false) );
 
   // Clicking outside the modal to close it
   elements.filterDiv.addEventListener('click', () => {
@@ -147,14 +135,10 @@ function setupEventListeners() {
   elements.themeSwitch.addEventListener('change', toggleTheme);
 
   // Show Add New Task Modal event listener
-  elements.createNewTaskBtn.addEventListener('click', () => {
-    toggleModal(true);
-  });
+  elements.createNewTaskBtn.addEventListener('click', () => toggleModal(true) );
 
   // Add new task form submission event listener
-  elements.modalWindow.addEventListener('submit',  (event) => {
-    addTask(event);
-  });
+  elements.modalWindow.addEventListener('submit',  (event) =>  addTask(event) );
 };
 
 // Toggles tasks modal
@@ -288,6 +272,16 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeData();
   init();
 });
+
+// Function checks if local storage already has data, if not it loads initialData to localStorage
+function initializeData() {
+  if (!localStorage.getItem('tasks')) {
+    localStorage.setItem('tasks', JSON.stringify(initialData)); 
+    localStorage.setItem('showSideBar', 'true');
+  } else {
+    console.log('Data already exists in localStorage');
+  };
+};
 
 function init() {
   setupEventListeners();

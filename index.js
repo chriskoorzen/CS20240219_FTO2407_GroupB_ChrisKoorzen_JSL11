@@ -10,8 +10,8 @@ import {
 import { initialData } from "./initialData.js";
 
 
-// Get frequently used elements from the DOM
-const elements = {
+// --- GLOBAL VARIABLES ---
+const elements = {  // Get references to frequently used elements from the DOM
   headerBoardName : document.getElementById("header-board-name"),
   columnDivs : document.querySelectorAll(".column-div"),
   editTaskModal : document.getElementById("edit-task-modal-window"),
@@ -25,12 +25,17 @@ const elements = {
   sideBar:  document.getElementById("side-bar-div")
 };
 
-let activeBoard = "";
+let activeBoard;
 
+
+// --- MAIN FUNCTIONALITY ---
 // Extracts unique board names from tasks
 function fetchAndDisplayBoardsAndTasks() {
   const tasks = getTasks();
-  const boards = [...new Set(tasks.map(task => task.board).filter(Boolean))];
+  const boards = [...new Set(       // (finally) get unique, and unpack into array 
+    tasks.map(task => task.board)   // Get various boards
+    .filter(item => Boolean(item))  // remove "falsy values"
+  )];
   displayBoards(boards);
   if (boards.length > 0) {
     const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"));

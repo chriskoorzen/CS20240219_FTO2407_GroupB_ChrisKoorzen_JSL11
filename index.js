@@ -236,8 +236,8 @@ function openEditTaskModal(task) {
     
     // Check if valid - Title cannot be empty
     if (title === ""){
-      alert("Please enter a non-empty Title");  // Warn
-      title.value = "";                         // Reset
+      alert("Please enter a non-empty Title");                            // Warn
+      elements.editTaskForm.elements["edit-task-title-input"].value = ""; // Reset
       return;
     };
 

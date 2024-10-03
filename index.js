@@ -128,6 +128,7 @@ function setupEventListeners() {
 
   // Clicking outside the modal to close it
   elements.filterDiv.addEventListener('click', () => {
+    // Just "close" all modals
     toggleModal(false);
     toggleModal(false, elements.editTaskModal);
   });
@@ -224,7 +225,7 @@ function openEditTaskModal(task) {
 
   // Use onclick to ensure there is only ever one listener loaded
   // on the edit modal buttons
-  // Call saveTaskChanges upon click of Save Changes button
+  // Unpack the "saveTaskChanges" function body into the save button eventlistener (just easier to track what's happening in the code)
   saveBtn.onclick = () => { 
     
     // Validate
@@ -243,7 +244,7 @@ function openEditTaskModal(task) {
 
     // Save changes
     const saved = putTask(task.id, {
-      "id": task.id,          // use existing ID
+      "id": task.id,          // use existing ID (we don't necessarily need to)
       "title": title,
       "description": description,
       "status": status,
